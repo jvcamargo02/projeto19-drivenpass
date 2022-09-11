@@ -11,8 +11,57 @@ datasource db {
 }
 
 model Users {
-  id       Int      @id @default(autoincrement())
-  email  String   @db.Text @unique
-  password String   @db.Text
+  id        Int        @id @default(autoincrement())
+  email     String     @unique @db.Text
+  password  String     @db.Text
+  createdAt DateTime   @default(now())
+  Sessions  Sessions[]
+  Credentials Credentials[]
+  Notes Notes[]
+  Cards Cards[]
+}
+
+model Sessions {
+  id        Int      @id @default(autoincrement())
+  user      Users    @relation(fields: [userId], references: [id])
+  userId    Int
   createdAt DateTime @default(now())
+}
+
+model Credentials {
+  id Int @id @default(autoincrement())
+  url String @db.Text
+  username String @db.VarChar(100)
+  password String @db.Text
+  title String @db.Text
+  user Users @relation(fields: [userId], references: [id])
+  userId Int 
+}
+
+model Notes {
+  id Int @id @default(autoincrement())
+  title String @db.VarChar(50)
+  text String @db.VarChar(1000)
+  user Users @relation(fields: [userId], references: [id])
+  userId Int
+}
+
+model Cards {
+  id Int @id @default(autoincrement())
+  number String @db.Text
+  holderName String @db.Text
+  securityCode String @db.Text
+  expirationDate String @db.Text
+  password String @db.Text
+  isVirtual Boolean @db.Boolean
+  type Role
+  title String @db.Text
+  user Users @relation(fields: [userId], references: [id])
+  userId Int
+}
+
+enum Role {
+  credit
+  debit
+  both
 }

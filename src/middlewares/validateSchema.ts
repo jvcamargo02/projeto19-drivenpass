@@ -6,7 +6,7 @@ export const validateSchema = (schema: ObjectSchema) => {
         const { error } = schema.validate(req.body)
 
         if (error) {
-            throw { type: "Unprocessable_entity", message: error}
+            throw { type: "unprocessable_entity", message: error}
         }
 
         next()

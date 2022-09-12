@@ -1,6 +1,6 @@
 import * as sessionsServices from "../services/sessionsServices";
 import * as cardRepository from "../repositories/cardRepository";
-import { Card, CardData } from "../types/cardTypes";
+import { CardData } from "../types/cardTypes";
 import { decrypt, encrypt } from "../utils/encrypt";
 
 export async function create(
@@ -50,7 +50,7 @@ export async function deleteCard(
             message: "Card(s) not found or invalid user",
         };
 
-    return deleteCard;
+    return deletedCard;
 }
 
 async function isValidTitle(title: string, userId: number) {

@@ -1,0 +1,11 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const wifiController_1 = require("../controllers/wifiController");
+const validateSchema_1 = require("../middlewares/validateSchema");
+const wifiSchemas_1 = require("../schemas/wifiSchemas");
+const wifiRoute = (0, express_1.Router)();
+wifiRoute.post("/wifi", (0, validateSchema_1.validateSchema)(wifiSchemas_1.wifiSchema), wifiController_1.create);
+wifiRoute.get('/wifi', wifiController_1.getWifi);
+wifiRoute.delete("/wifi/:id", wifiController_1.deleteWifi);
+exports.default = wifiRoute;

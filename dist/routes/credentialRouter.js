@@ -1,0 +1,11 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const credentialController_1 = require("../controllers/credentialController");
+const validateSchema_1 = require("../middlewares/validateSchema");
+const credentialSchemas_1 = require("../schemas/credentialSchemas");
+const credentialRoute = (0, express_1.Router)();
+credentialRoute.post("/credential", (0, validateSchema_1.validateSchema)(credentialSchemas_1.credentialSchema), credentialController_1.create);
+credentialRoute.get("/credential", credentialController_1.findById);
+credentialRoute.delete("/credential/:id", credentialController_1.deleteCredential);
+exports.default = credentialRoute;
